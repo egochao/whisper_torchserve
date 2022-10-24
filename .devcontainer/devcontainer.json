@@ -1,0 +1,34 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.245.2/containers/docker-existing-dockerfile
+{
+	"name": "Whisper serve",
+
+	// Sets the run context to one level up instead of the .devcontainer folder.
+	"context": "..",
+
+	// Update the 'dockerFile' property if you aren't using the standard 'Dockerfile' filename.
+	"dockerFile": "../Dockerfile",
+
+	"settings": {
+		"terminal.integrated.defaultProfile.linux": "bash"
+	},
+	// Uncomment the next line to run commands after the container is created - for example installing curl.
+	"postCreateCommand": "pip install -r requirements.txt",
+
+	"customizations": {
+		// Configure properties specific to VS Code.
+		"vscode": {
+			// Add the IDs of extensions you want installed when the container is created.
+			"extensions": [
+				"ms-python.python",
+				"ms-python.vscode-pylance",
+				"njpwerner.autodocstring",
+				"GitHub.copilot"
+			]
+		}
+	},
+	"features": {
+		"github-cli": "latest",
+		"git-lfs": "latest"
+	}
+}
