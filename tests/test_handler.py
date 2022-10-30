@@ -6,16 +6,15 @@ from tests.utils import MockContext
 @pytest.fixture()
 def serve_context():
     context = MockContext(
-        model_dir="model_pt",
         model_name="base_whisper",
-        model_pt_file="base.en",
+        model_type="base.en",
+        model_dir="model_pt",
         )
     return context
 
 def initialize(serve_context):
-    model_context = serve_context
     handler = WhisperHandler()
-    handler.initialize(model_context)
+    handler.initialize(serve_context)
 
     return handler
 

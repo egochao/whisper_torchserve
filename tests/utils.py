@@ -56,27 +56,17 @@ class MockContext:
 
     def __init__(
         self,
-        model_dir : str,
-        model_name : str,
-        model_pt_file : str = None,
-        model_file : str = None, 
-        gpu_id : str = "0",
+        model_name,
+        model_type : str = None,
+        model_dir : str = None, 
     ):
         self.manifest = {"model": {}}
-        if model_pt_file:
-            self.manifest["model"]["serializedFile"] = model_pt_file
-
-        if model_file:
-            self.manifest["model"]["modelFile"] = model_file
-
-        self.system_properties = {"model_dir": model_dir}
-
-        if torch.cuda.is_available() and gpu_id:
-            self.system_properties["gpu_id"] = gpu_id
-
-        self.explain = False
+        self.manifest["model"]["modelName"] = model_name
+        self.manifest["model"]["modelType"] = model_type
+        self.manifest["model"]["modelDir"] = model_dir
         self.metrics = MetricsStore(uuid.uuid4(), model_name)
 
+        self.explain = False
     def get_request_header(self, idx, exp):
         if idx and exp:
             if self.explain:

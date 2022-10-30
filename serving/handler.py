@@ -7,6 +7,7 @@ import uuid
 from pathlib import Path
 
 from whisper.decoding import DecodingOptions, DecodingResult
+from torch.profiler import ProfilerActivity
 
 class WhisperHandler(BaseHandler):
     def __init__(self):
@@ -14,11 +15,14 @@ class WhisperHandler(BaseHandler):
         self.initialized = False
 
     def initialize(self, ctx):
-        properties = ctx.system_properties
-        model_dir = properties.get("model_dir") or "model_pt"
-        model_pt_file = properties.get("model_pt_file") or "base.en"
+        manifest_model = ctx.manifest["model"]
         
-        self.model = whisper.load_model(model_pt_file, download_root=model_dir)
+        self.profiler_args = {
+            "activities" : [ProfilerActivity.CPU],
+            "record_shapes": True,
+        }
+
+        self.model = whisper.load_model(manifest_model["modelType"], download_root=manifest_model["modelDir"])
         self.device = self.model.device
         self.option = DecodingOptions(
                     task='transcribe', 
