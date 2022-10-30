@@ -1,6 +1,6 @@
 import pytest
 
-from serving.handler import WhisperHandler
+from handler import WhisperHandler
 from tests.utils import MockContext
 
 
@@ -31,7 +31,7 @@ def test_handle(serve_context):
 
     assert len(results) == 1
 
-    transcription = results[0].text.lower()
+    transcription = results[0].lower()
     assert "my fellow americans" in transcription
     assert "your country" in transcription
     assert "do for you" in transcription
@@ -46,4 +46,4 @@ def test_handle_batch(serve_context):
     test_data = [{"data": audio_bytes}] * 2
     results = handler.handle(test_data, context)
     assert len(results) == 2
-    assert "my fellow americans" in results[1].text.lower()
+    assert "my fellow americans" in results[1].lower()

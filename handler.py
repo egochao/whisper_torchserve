@@ -60,8 +60,8 @@ class WhisperHandler(BaseHandler):
             list_pred.append(result)
         return list_pred
 
-    def postprocess(self, list_infer_pred: List[torch.Tensor]) -> List[DecodingResult]:
+    def postprocess(self, list_infer_pred: List[DecodingResult]) -> List[str]:
         list_result = []
         for infer_pred in list_infer_pred:
-            list_result.append(infer_pred)
+            list_result.append(infer_pred.text)
         return list_result
