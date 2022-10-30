@@ -4,7 +4,10 @@ from tests.utils import start_torchserve, stop_torchserve
 
 def pytest_addoption(parser):
     parser.addoption(
-        "--integration", action="store_true", default=False, help="run tests connect with external resource"
+        "--integration",
+        action="store_true",
+        default=False,
+        help="run tests connect with external resource",
     )
 
 
@@ -22,10 +25,11 @@ def pytest_collection_modifyitems(config, items):
 def start2serve():
     status = start_torchserve(
         ncs=True,
-        model_store="model_store", 
-        models="asr_model.mar", 
+        model_store="model_store",
+        models="asr_model.mar",
         config_file="model_store/torchserve_config.properties",
-        wait_for=25)
+        wait_for=25,
+    )
 
     yield status
     stop_torchserve()

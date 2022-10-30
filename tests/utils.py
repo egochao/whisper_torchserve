@@ -7,9 +7,16 @@ import torch
 
 from ts.metrics.metrics_store import MetricsStore
 
+
 def start_torchserve(
-        ncs=False, model_store="model_store", workflow_store="",
-        models="", config_file="", log_file="", wait_for=15):
+    ncs=False,
+    model_store="model_store",
+    workflow_store="",
+    models="",
+    config_file="",
+    log_file="",
+    wait_for=15,
+):
     """Initialize a local torchserve endpoint"""
     logging.info("## Starting TorchServe")
     cmd = f"torchserve --start --model-store={model_store}"
@@ -49,6 +56,7 @@ def stop_torchserve(wait_for=10):
         logging.info("## TorchServe failed to stop !")
         return False
 
+
 class MockContext:
     """
     Mock class to replicate the context passed into model initialize
@@ -57,8 +65,8 @@ class MockContext:
     def __init__(
         self,
         model_name,
-        model_type : str = None,
-        model_dir : str = None, 
+        model_type: str = None,
+        model_dir: str = None,
     ):
         self.manifest = {"model": {}}
         self.manifest["model"]["modelName"] = model_name
@@ -67,6 +75,7 @@ class MockContext:
         self.metrics = MetricsStore(uuid.uuid4(), model_name)
 
         self.explain = False
+
     def get_request_header(self, idx, exp):
         if idx and exp:
             if self.explain:

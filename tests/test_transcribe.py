@@ -20,6 +20,7 @@ from whisper.decoding import DecodingOptions
 #     assert "your country" in transcription
 #     assert "do for you" in transcription
 
+
 def test_transcribe_base_en():
     model_name = "base.en"
     model = whisper.load_model(model_name, download_root="./model_pt")
