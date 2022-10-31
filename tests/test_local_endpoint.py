@@ -1,8 +1,8 @@
 import pytest
 import requests
 
-# @pytest.mark.integration
-def test_send_real_request():
+@pytest.mark.integration
+def test_send_real_request(start2serve):
     with open("tests/jfk.flac", "rb") as f:
         audio_bytes = f.read()
 

@@ -26,8 +26,7 @@ def start2serve():
     status = start_torchserve(
         ncs=True,
         model_store="model_store",
-        models="asr_model.mar",
-        config_file="model_store/torchserve_config.properties",
+        models="whisper_base.mar",
         wait_for=25,
     )
 

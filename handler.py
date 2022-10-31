@@ -1,14 +1,27 @@
-from typing import Any, Dict, List
+from typing import Dict, List
 
 import torch
 from ts.torch_handler.base_handler import BaseHandler
 import whisper
 import uuid
 from pathlib import Path
+import logging
+
 
 from whisper.decoding import DecodingOptions, DecodingResult
 from torch.profiler import ProfilerActivity
 
+
+
+ipex_enabled = False
+try:
+    import intel_extension_for_pytorch as ipex
+
+    ipex_enabled = True
+except ImportError as error:
+    logging.warning(
+        "IPEX is enabled but intel-extension-for-pytorch is not installed. Proceeding without IPEX."
+    )
 
 class WhisperHandler(BaseHandler):
     def __init__(self):
@@ -16,16 +29,22 @@ class WhisperHandler(BaseHandler):
         self.initialized = False
 
     def initialize(self, ctx):
-        manifest_model = ctx.manifest["model"]
-
+        self.manifest = ctx.manifest
+        # torch.set_num_threads(4)
         self.profiler_args = {
             "activities": [ProfilerActivity.CPU],
             "record_shapes": True,
         }
 
         self.model = whisper.load_model(
-            manifest_model["modelType"], download_root=manifest_model["modelDir"]
+            self.manifest["model"]["modelType"], 
+            download_root=self.manifest["model"]["modelDir"]
         )
+        self.model.eval()
+        if ipex_enabled:
+            self.model = self.model.to(memory_format=torch.channels_last)
+            self.model = ipex.optimize(self.model)
+
         self.device = self.model.device
         self.option = DecodingOptions(
             task="transcribe",
