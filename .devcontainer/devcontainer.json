@@ -13,7 +13,7 @@
 		"terminal.integrated.defaultProfile.linux": "bash"
 	},
 	// Uncomment the next line to run commands after the container is created - for example installing curl.
-	// "postCreateCommand": "pip install -r requirements.txt",
+	"postCreateCommand": "pip install pytest pre-commit && pre-commit install",
 
 	"customizations": {
 		// Configure properties specific to VS Code.
@@ -28,7 +28,6 @@
 		}
 	},
 	"features": {
-		"github-cli": "latest",
-		"git-lfs": "latest"
+		"github-cli": "latest"
 	}
 }
