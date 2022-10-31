@@ -1,9 +1,20 @@
+import argparse
 from datetime import datetime
 import whisper
 from pathlib import Path
 import json
 import shutil
 
+
+
+def parse():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--model_name", type=str, default="whisper_base")
+    parser.add_argument("--model_type", type=str, default="base.en")
+    parser.add_argument("--model_dir", type=str, default="model_pt")
+    parser.add_argument("--handler", type=str, default="handler.py")
+    args = parser.parse_args()
+    return args
 
 def copy_extra_files(extra_files, tmp_dir):
     """Copy extra files to tmp_dir. work with both folder and file"""
@@ -14,10 +25,11 @@ def copy_extra_files(extra_files, tmp_dir):
             shutil.copy(file, tmp_dir.joinpath(file))
 
 def main():
-    model_name = "whisper_base"
-    model_type = "base.en"
-    model_dir = "model_pt"
-    handler = "handler.py"
+    args = parse()
+    model_name = args.model_name
+    model_type = args.model_type
+    model_dir = args.model_dir
+    handler = args.handler
 
     extra_files = ["whisper", model_dir, handler]
     tmp_dir = Path("./dummy_temp")
