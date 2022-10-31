@@ -9,9 +9,9 @@ import shutil
 
 def parse():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--model_name", type=str, default="whisper_base")
-    parser.add_argument("--model_type", type=str, default="base.en")
-    parser.add_argument("--model_dir", type=str, default="model_pt")
+    parser.add_argument("--model-name", type=str, default="whisper_base")
+    parser.add_argument("--model-type", type=str, default="base.en")
+    parser.add_argument("--model-dir", type=str, default="model_pt")
     parser.add_argument("--handler", type=str, default="handler.py")
     args = parser.parse_args()
     return args

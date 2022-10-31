@@ -1,0 +1,17 @@
+# User define
+dummy*
+
+.DS_Store
+.github
+.gitignore
+.idea
+.jekyll-cache
+.jekyll-metadata
+.sass-cache
+tests
+_releaser
+_site
+CONTRIBUTING.md
+Dockerfile
+docker-compose.yml
+/vendor
