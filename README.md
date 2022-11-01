@@ -20,5 +20,14 @@ python custom_mar_build.py
 
 2. Run torchserve 
 ```
-torchserve --start --model-store   model_store --models whisper_base.mar --foreground --no-config-snapshots
+torchserve --start --model-store model_store --models whisper_base.mar --foreground --no-config-snapshots --ts-config config.properties
+```
+
+
+## 3. Serve from container
+
+```
+docker build -t test .
+
+docker run --network=host test:latest
 ```
