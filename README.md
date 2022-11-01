@@ -11,7 +11,7 @@ Start the working environment by:
 
 - Open in Container command
 
-## 2. Build step
+## 2. Manual build step
 
 1. Build mar file for torchserve(download included)
 ```
@@ -25,11 +25,16 @@ torchserve --start --model-store model_store --models whisper_base.mar --foregro
 
 
 ## 3. Serve from container
-
+Or you can start docker and test it right away
 ```
-docker build -t test .
+docker build -t whisper .
 
-docker run --network=host test:latest
+docker run --network=host whisper:latest
+```
+
+Test out the local endpoint
+```
+python send_request.py 
 ```
 
 ## 4. Note
