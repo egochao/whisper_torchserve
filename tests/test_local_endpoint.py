@@ -7,7 +7,7 @@ def test_send_real_request(start2serve):
         audio_bytes = f.read()
 
     res = requests.post(
-        "http://localhost:8080/predictions/whisper_base", 
+        "http://localhost:8888/predictions/whisper_base", 
         files={"data": audio_bytes})
     assert res.status_code == 200
     transcription =  res.text.lower()

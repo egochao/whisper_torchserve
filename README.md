@@ -31,3 +31,9 @@ docker build -t test .
 
 docker run --network=host test:latest
 ```
+
+## 4. Note
+Enable profiling - run in same terminal as torchserve
+```
+export ENABLE_TORCH_PROFILER=true
+```
