@@ -64,6 +64,9 @@ def main():
     marpath = zippath.rename(zippath.with_suffix(".mar"))
     print(f"Created MAR file: {marpath}")
 
-
+    # clean up
+    shutil.rmtree(tmp_dir, ignore_errors=True)
+    shutil.rmtree(model_dir, ignore_errors=True)
+    
 if __name__ == '__main__':
     main()
