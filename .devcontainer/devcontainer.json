@@ -13,7 +13,7 @@
 		"terminal.integrated.defaultProfile.linux": "bash"
 	},
 	// Uncomment the next line to run commands after the container is created - for example installing curl.
-	"postCreateCommand": "pip install pytest",
+	"postCreateCommand": "pip install pytest && python custom_mar_build.py",
 
 	"customizations": {
 		// Configure properties specific to VS Code.
