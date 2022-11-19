@@ -34,6 +34,7 @@ def main():
     extra_files = ["whisper", model_dir, handler]
     tmp_dir = Path("./dummy_temp")
     shutil.rmtree(tmp_dir, ignore_errors=True)
+    shutil.rmtree(model_dir, ignore_errors=True)
     tmp_dir.mkdir(parents=True, exist_ok=True)
 
     _ = whisper.load_model(model_type, download_root=model_dir)
