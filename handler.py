@@ -12,8 +12,6 @@ import logging
 from whisper.decoding import DecodingOptions, DecodingResult
 from torch.profiler import ProfilerActivity
 
-
-
 ipex_enabled = False
 if os.environ.get("TS_IPEX_ENABLE", "false") == "true":
     try:
