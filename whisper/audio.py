@@ -16,9 +16,7 @@ N_MELS = 80
 HOP_LENGTH = 160
 CHUNK_LENGTH = 30
 N_SAMPLES = CHUNK_LENGTH * SAMPLE_RATE  # 480000: number of samples in a chunk
-N_FRAMES = exact_div(
-    N_SAMPLES, HOP_LENGTH
-)  # 3000: number of frames in a mel spectrogram input
+N_FRAMES = exact_div(N_SAMPLES, HOP_LENGTH)  # 3000: number of frames in a mel spectrogram input
 
 
 def load_audio(file: str, sr: int = SAMPLE_RATE):
@@ -57,9 +55,7 @@ def pad_or_trim(array, length: int = N_SAMPLES, *, axis: int = -1):
     """
     if torch.is_tensor(array):
         if array.shape[axis] > length:
-            array = array.index_select(
-                dim=axis, index=torch.arange(length, device=array.device)
-            )
+            array = array.index_select(dim=axis, index=torch.arange(length, device=array.device))
 
         if array.shape[axis] < length:
             pad_widths = [(0, 0)] * array.ndim
@@ -89,15 +85,11 @@ def mel_filters(device, n_mels: int = N_MELS) -> torch.Tensor:
         )
     """
     assert n_mels == 80, f"Unsupported n_mels: {n_mels}"
-    with np.load(
-        os.path.join(os.path.dirname(__file__), "assets", "mel_filters.npz")
-    ) as f:
+    with np.load(os.path.join(os.path.dirname(__file__), "assets", "mel_filters.npz")) as f:
         return torch.from_numpy(f[f"mel_{n_mels}"]).to(device)
 
 
-def log_mel_spectrogram(
-    audio: Union[str, np.ndarray, torch.Tensor], n_mels: int = N_MELS
-):
+def log_mel_spectrogram(audio: Union[str, np.ndarray, torch.Tensor], n_mels: int = N_MELS):
     """
     Compute the log-Mel spectrogram of
 
