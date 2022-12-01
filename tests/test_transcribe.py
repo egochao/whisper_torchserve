@@ -24,7 +24,7 @@ from whisper.decoding import DecodingOptions
 def test_transcribe_base_en():
     model_name = "base.en"
     model = whisper.load_model(model_name, download_root="./model_pt")
-    audio_path = os.path.join(os.path.dirname(__file__), "jfk.flac")
+    audio_path = "tests/data/jfk.flac"
 
     language = "en" if model_name.endswith(".en") else None
     result = model.transcribe(audio_path, language=language)

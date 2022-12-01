@@ -24,7 +24,7 @@ def initialize(serve_context):
 def test_handle(serve_context):
     context = serve_context
     handler = initialize(serve_context)
-    with open("tests/jfk.flac", "rb") as f:
+    with open("tests/data/jfk.flac", "rb") as f:
         audio_bytes = f.read()
     test_data = [{"data": audio_bytes}]
     results = handler.handle(test_data, context)
@@ -40,7 +40,7 @@ def test_handle(serve_context):
 def test_handle_batch(serve_context):
     context = serve_context
     handler = initialize(serve_context)
-    with open("tests/jfk.flac", "rb") as f:
+    with open("tests/data/jfk.flac", "rb") as f:
         audio_bytes = f.read()
 
     test_data = [{"data": audio_bytes}] * 2
