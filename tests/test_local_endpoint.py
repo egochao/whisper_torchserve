@@ -3,7 +3,7 @@ import requests
 
 @pytest.mark.integration
 def test_send_real_request(start2serve):
-    with open("tests/jfk.flac", "rb") as f:
+    with open("tests/data/jfk.flac", "rb") as f:
         audio_bytes = f.read()
 
     res = requests.post(

@@ -2,7 +2,7 @@ import requests
 import time
 
 def main():
-    with open("tests/jfk.flac", "rb") as f:
+    with open("tests/data/jfk.flac", "rb") as f:
         audio_bytes = f.read()
 
     st = time.perf_counter()
