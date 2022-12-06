@@ -1,5 +1,5 @@
 import pytest
-from tests.utils import start_torchserve, stop_torchserve
+from ..tests.utils import start_torchserve, stop_torchserve
 
 
 def pytest_addoption(parser):
